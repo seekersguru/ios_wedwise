@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6724" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WWBookingDetails">
+            <connections>
+                <outlet property="tblBooking" destination="lHU-kG-rVJ" id="Euo-mi-3JW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lHU-kG-rVJ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="YWN-kv-wDp"/>
+                        <constraint firstAttribute="height" constant="568" id="qpE-ji-vgq"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="7HK-te-xax"/>
+                        <outlet property="delegate" destination="-1" id="0Hn-cI-oIY"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="lHU-kG-rVJ" secondAttribute="bottom" id="NAb-ok-wit"/>
+                <constraint firstAttribute="trailing" secondItem="lHU-kG-rVJ" secondAttribute="trailing" id="eVJ-1v-U7l"/>
+                <constraint firstItem="lHU-kG-rVJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pLO-fJ-xHL"/>
+                <constraint firstItem="lHU-kG-rVJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="t8t-QY-8Nd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="127" y="233"/>
+        </view>
+    </objects>
+</document>

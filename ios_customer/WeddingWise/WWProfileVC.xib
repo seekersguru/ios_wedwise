@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WWProfileVC">
+            <connections>
+                <outlet property="btnBackButton" destination="rbO-rl-3X0" id="ZDl-eA-4AS"/>
+                <outlet property="btnTentativeDate" destination="Hut-dP-YSW" id="Rqj-hX-840"/>
+                <outlet property="datePicker" destination="WhB-hG-itW" id="W4B-xN-ohA"/>
+                <outlet property="imgDatePicker" destination="r6E-Uq-OhB" id="Vm9-dQ-UMA"/>
+                <outlet property="lblTitle" destination="3Tk-4F-gW8" id="cCX-FB-qj2"/>
+                <outlet property="txtBrideName" destination="Ujo-rO-GZz" id="F4g-EB-uyI"/>
+                <outlet property="txtContactName" destination="QTD-ew-5c3" id="6Xm-1P-SjW"/>
+                <outlet property="txtContactNo" destination="YCq-lq-vv2" id="VRC-1k-B4T"/>
+                <outlet property="txtEmailAddress" destination="uCa-7x-0vn" id="EMi-PX-eZh"/>
+                <outlet property="txtGroomName" destination="ODs-nh-OAr" id="L8Q-Gp-4se"/>
+                <outlet property="view" destination="pv3-Vn-0YI" id="prb-4Y-Obi"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="pv3-Vn-0YI">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="cm3-Rh-NwQ">
+                    <rect key="frame" x="0.0" y="67" width="320" height="501"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header_divder" translatesAutoresizingMaskIntoConstraints="NO" id="N42-lq-jxk">
+                    <rect key="frame" x="0.0" y="58" width="320" height="8"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbO-rl-3X0">
+                    <rect key="frame" x="2" y="10" width="60" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" image="back@arrow">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="backButtonPressed:" destination="-1" eventType="touchUpInside" id="PSJ-Tg-elR"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="txtbox_reg" translatesAutoresizingMaskIntoConstraints="NO" id="x8r-2Y-nVp">
+                    <rect key="frame" x="17" y="96" width="287" height="289"/>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uCa-7x-0vn">
+                    <rect key="frame" x="31" y="103" width="259" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="KQF-fh-KQj"/>
+                    </connections>
+                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="txtbox_diveder" translatesAutoresizingMaskIntoConstraints="NO" id="Gdy-VB-NUG">
+                    <rect key="frame" x="31" y="141" width="259" height="2"/>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bride Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ujo-rO-GZz">
+                    <rect key="frame" x="31" y="152" width="259" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Xzz-uD-FEu"/>
+                    </connections>
+                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="txtbox_diveder" translatesAutoresizingMaskIntoConstraints="NO" id="JYt-xB-k37">
+                    <rect key="frame" x="31" y="190" width="259" height="2"/>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Groom Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ODs-nh-OAr">
+                    <rect key="frame" x="31" y="200" width="259" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="JXW-4T-4mW"/>
+                    </connections>
+                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="txtbox_diveder" translatesAutoresizingMaskIntoConstraints="NO" id="jUZ-Xg-mIl">
+                    <rect key="frame" x="31" y="238" width="259" height="2"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="txtbox_diveder" translatesAutoresizingMaskIntoConstraints="NO" id="Uwh-oY-2Xk">
+                    <rect key="frame" x="30" y="334" width="259" height="2"/>
+                </imageView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contact number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YCq-lq-vv2">
+                    <rect key="frame" x="31" y="248" width="259" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="w1p-Af-baH"/>
+                    </connections>
+                </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="txtbox_diveder" translatesAutoresizingMaskIntoConstraints="NO" id="fT3-3q-CUs">
+                    <rect key="frame" x="31" y="286" width="259" height="2"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hut-dP-YSW">
+                    <rect key="frame" x="31" y="344" width="259" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Tentative Wedding Date">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.80784313730000001" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="btnTentativeDatePressed:" destination="-1" eventType="touchUpInside" id="UvC-Hv-D9z"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJL-df-GcM">
+                    <rect key="frame" x="17" y="468" width="287" height="45"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Update" backgroundImage="logIn_bt">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="updateUserProfile:" destination="-1" eventType="touchUpInside" id="vZT-eP-bKL"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="txtbox_diveder" translatesAutoresizingMaskIntoConstraints="NO" id="7Wa-eC-ss2">
+                    <rect key="frame" x="31" y="383" width="259" height="2"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r6E-Uq-OhB">
+                    <rect key="frame" x="0.0" y="380" width="320" height="139"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Tk-4F-gW8">
+                    <rect key="frame" x="81" y="14" width="163" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contact person" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QTD-ew-5c3">
+                    <rect key="frame" x="31" y="296" width="259" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="0uR-80-Vdf"/>
+                    </connections>
+                </textField>
+                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="WhB-hG-itW">
+                    <rect key="frame" x="0.0" y="380" width="320" height="139"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <date key="date" timeIntervalSinceReferenceDate="458252473.24607402">
+                        <!--2015-07-10 20:21:13 +0000-->
+                    </date>
+                </datePicker>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-1629" y="-89"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back@arrow" width="14" height="14"/>
+        <image name="bg" width="320" height="568"/>
+        <image name="header_divder" width="326" height="6"/>
+        <image name="logIn_bt" width="288" height="43"/>
+        <image name="txtbox_diveder" width="259" height="2"/>
+        <image name="txtbox_reg" width="287" height="265"/>
+    </resources>
+</document>

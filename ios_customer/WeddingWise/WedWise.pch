@@ -1,0 +1,62 @@
+//
+//  MVelani.pch
+//  MVelani
+//
+//  Created by Deepak Sharma on 2/13/15.
+//  Copyright (c) 2015 Deepak Sharma. All rights reserved.
+//
+
+#ifndef MVelani_MVelani_pch
+#define MVelani_MVelani_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "WWCommon.h"
+
+#import "AFHTTPSessionManager.h"
+#import "SCNetworkReachability.h"
+#import "WWWebService.h"
+
+#import "MBProgressHUD.h"
+#import "AFNetworkReachabilityManager.h"
+#import  "AppDelegate.h"
+#import "UIImageView+AFNetworking.h"
+
+#endif
+
+#endif
+
+
+#define kWebServiceUrl                  @"http://wedwise.work/api/"
+#define kImagePrefixUrl                  @"http://52.11.207.26"
+
+#define kNoNetwork                      @"No network available"
+#define kNotifacationReachability       @"NotifacationReachability"
+#define AppFont                         @"GothamRounded-Book"
+
+
+#define kAppName                        @"WedWise"
+#define kEnterEmail                     @"Please enter email address."
+#define kEnterPassword                  @"Please enter password."
+#define kEnterBrideName                 @"Please enter bride name."
+#define kGroomName                      @"Please enter groom name."
+#define kContactNumber                  @"Please enter contact number."
+#define kValidEmail                     @"Please enter valid email."
+#define kValidContactName               @"Please enter contact name."
+#define kTentativeDate                  @"Please enter tentative wedding date."
+#define kContactName                    @"Please enter contact name."
+
+#define kGPClientID                     @"1089791830580-d6ot0lmcuqvdftcqqh97a73n8q22l95e.apps.googleusercontent.com"
+//341522735800-tkngmd3u56mq7shvea9pmibng12qdmhj.apps.googleusercontent.com
+
+
+//#define kGTLAuthScopePlusLogin          @"https://www.googleapis.com/auth/plus.login"
+
+#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DLog(...)
+#endif
