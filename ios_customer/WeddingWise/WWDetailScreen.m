@@ -71,6 +71,8 @@
     [_lblSearchPrice setHidden:YES];
     [_lblSearchVenue setHidden:YES];
     [_lblSearchString setHidden:YES];
+    [_clearFilterButton setHidden:YES];
+    
     _searchView.hidden= YES;
 }
 
@@ -373,21 +375,23 @@
                          animations:^{
                              
                              if (isHidden) {
-                                 _searchView.frame = CGRectMake(0, 55, self.searchView.frame.size.width, 83);
-                                 _imgDropdown.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(360));
+                                 _searchView.frame = CGRectMake(0, 55, self.searchView.frame.size.width, 100);
+                                 
                                  [_lblSearchLocation setHidden:NO];
                                  [_lblSearchPrice setHidden:NO];
                                  [_lblSearchVenue setHidden:NO];
                                  [_lblSearchString setHidden:NO];
+                                 [_clearFilterButton setHidden:NO];
                                  [_vendorNameLabel setTitle:@"Hide filter" forState:UIControlStateNormal];
                              }
                              else{
-                                 _imgDropdown.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(180));
+                                 
                                  _searchView.frame = CGRectMake(0, 55, self.searchView.frame.size.width, 1);
                                  [_lblSearchLocation setHidden:YES];
                                  [_lblSearchPrice setHidden:YES];
                                  [_lblSearchVenue setHidden:YES];
                                  [_lblSearchString setHidden:YES];
+                                 [_clearFilterButton setHidden:YES];
                                  [_vendorNameLabel setTitle:@"Show filter" forState:UIControlStateNormal];
                              }
                          }
@@ -402,6 +406,49 @@
     
     
     
+}
+-(IBAction)closeButtonClicked:(id)sender{
+    
+    [UIView animateWithDuration:0.3
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         _filterView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                         [_filterView setHidden:YES];
+                     }];
+    
+}
+- (void)clearFilter:(id)sender{
+    
+    _searchView.frame = CGRectMake(0, 55, self.searchView.frame.size.width, 1);
+    [_lblSearchLocation setHidden:YES];
+    [_lblSearchPrice setHidden:YES];
+    [_lblSearchVenue setHidden:YES];
+    [_lblSearchString setHidden:YES];
+    [_clearFilterButton setHidden:YES];
+
+    _lblSearchLocation.text= @"";
+    _lblSearchPrice.text= @"";
+    _lblSearchVenue.text= @"";
+    _lblSearchString.text= @"";
+    
+    [_venueTypeButton setTitle:@"-- Select Venue --" forState:UIControlStateNormal];
+    [_priceRangeButton setTitle:@"-- Select Price --" forState:UIControlStateNormal];
+
+    _lblSearchString.text= @"";
+
+    priceID= @"";
+    venueID= @"";
+    
+    _searchTextfield.text=@"";
+    _filterTextfield.text=@"";
+    _searchTextfield.text=@"";
+    _searchTextfield.text=@"";
+    
+    [self.vendorNameLabel setTitle:self.vendorList[0] forState:UIControlStateNormal];
+    [self callWebService:@"" page:@""];
 }
 #pragma mark - Table view
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -693,7 +740,6 @@
     }
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    
     return YES;
 }
 -(void)callLocationListAPI{

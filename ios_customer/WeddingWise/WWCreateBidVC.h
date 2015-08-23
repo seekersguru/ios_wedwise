@@ -28,19 +28,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *pricing2;
 
 @property (weak, nonatomic) IBOutlet UILabel *checkAvailbility;
-
+@property (weak, nonatomic) IBOutlet UILabel *staticCheckAvailbility;
 
 @property(nonatomic, weak)IBOutlet UIView *vwCalander;
 @property (nonatomic, weak) IBOutlet DSLCalendarView *calendarView;
 
+
+@property(nonatomic, weak)IBOutlet UIButton *btnDescriptionURL;
+
 //Static Label
 @property (weak, nonatomic) IBOutlet UILabel *eventStaticLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *timeSlotStaticLabel;
 @property (weak, nonatomic) IBOutlet UILabel *packageStaticLabel;
-
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
-
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 
@@ -49,6 +49,10 @@
 -(IBAction)backButtonPressed:(id)sender;
 -(IBAction)calendarBackButtonPressed:(id)sender;
 - (IBAction)selectClicked:(id)sender;
+-(IBAction)descriptionUrlClicked:(id)sender;
+
 -(void)rel;
+
+
 
 @end

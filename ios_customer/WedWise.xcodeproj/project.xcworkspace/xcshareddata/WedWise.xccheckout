@@ -12,6 +12,8 @@
 	<dict>
 		<key>10AA62ED635F87ACB515329F35D7077D997D2737</key>
 		<string>https://github.com/seekersguru/ios.git</string>
+		<key>A43F6AA2CFAB7A64103DA83AAC3CECCE59D5DD37</key>
+		<string>https://github.com/seekersguru/ios_wedwise</string>
 		<key>D715AAD919F6D73E35EA3047EB2D7364A0AAE255</key>
 		<string>https://github.com/seekersguru/ios_fresh</string>
 	</dict>
@@ -21,15 +23,17 @@
 	<dict>
 		<key>10AA62ED635F87ACB515329F35D7077D997D2737</key>
 		<string>../../../../ios</string>
-		<key>D715AAD919F6D73E35EA3047EB2D7364A0AAE255</key>
+		<key>A43F6AA2CFAB7A64103DA83AAC3CECCE59D5DD37</key>
 		<string>../../..</string>
+		<key>D715AAD919F6D73E35EA3047EB2D7364A0AAE255</key>
+		<string>../../../../ios_fresh</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/seekersguru/ios_fresh</string>
+	<string>https://github.com/seekersguru/ios_wedwise</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D715AAD919F6D73E35EA3047EB2D7364A0AAE255</string>
+	<string>A43F6AA2CFAB7A64103DA83AAC3CECCE59D5DD37</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -47,6 +51,14 @@
 			<string>D715AAD919F6D73E35EA3047EB2D7364A0AAE255</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ios_fresh</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A43F6AA2CFAB7A64103DA83AAC3CECCE59D5DD37</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios_wedwise</string>
 		</dict>
 	</array>
 </dict>

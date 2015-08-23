@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    menuData =[[NSArray alloc]initWithObjects:@"Create new booking",@"Availability",@"Change Password",@"Logout", nil];
+    menuData =[[NSArray alloc]initWithObjects:@"Update Availability",@"Logout", nil];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -54,23 +54,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.row) {
         case 0:{
-            WWCreateBidVC *createBidVC = [[WWCreateBidVC alloc] init];
-            [self.navigationController pushViewController:createBidVC animated:YES];
-            break;
-        }
-        case 1:{
             WWAvailabilityVC *availabilityVC = [[WWAvailabilityVC alloc] init];
             self.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:availabilityVC animated:YES];
             self.hidesBottomBarWhenPushed = NO;
             break;
         }
-        case 2:{
-            WWChangePasswordVC *changePassword=[[WWChangePasswordVC alloc]initWithNibName:@"WWChangePasswordVC" bundle:nil];
-            [self.navigationController pushViewController:changePassword animated:YES];
-        }
-            break;
-        case 3:{
+        case 1:{
             WWDashboardVC *dash=[[WWDashboardVC alloc]initWithNibName:@"WWDashboardVC" bundle:nil];
             dash.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:dash animated:YES];

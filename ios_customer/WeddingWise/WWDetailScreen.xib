@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WWDetailScreen">
             <connections>
+                <outlet property="clearFilterButton" destination="znp-Ab-zSm" id="GE6-kN-hh3"/>
                 <outlet property="dynamicFilterView" destination="ff2-Be-c89" id="3R0-Pa-Cb5"/>
                 <outlet property="filterTextfield" destination="CaZ-4t-HtY" id="rgu-p7-9Nx"/>
                 <outlet property="filterView" destination="xJc-Kq-Max" id="URJ-Fg-YgL"/>
@@ -67,11 +68,23 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="ff2-Be-c89">
-                            <rect key="frame" x="19" y="16" width="282" height="314"/>
+                            <rect key="frame" x="19" y="16" width="282" height="274"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pbB-qH-yOx">
+                                    <rect key="frame" x="232" y="6" width="46" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <state key="normal" title="X">
+                                        <color key="titleColor" red="0.95294117649999999" green="0.58823529409999997" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="closeButtonClicked:" destination="-1" eventType="touchUpInside" id="4vp-CQ-TbK"/>
+                                    </connections>
+                                </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" minimumFontSize="17" id="vIW-AV-gtf">
-                                    <rect key="frame" x="13" y="22" width="256" height="30"/>
+                                    <rect key="frame" x="13" y="39" width="256" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -80,7 +93,7 @@
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6Va-qh-Ezs">
-                                    <rect key="frame" x="76" y="250" width="131" height="30"/>
+                                    <rect key="frame" x="76" y="232" width="131" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.94117647059999998" green="0.41176470590000003" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="SEARCH">
@@ -92,7 +105,7 @@
                                     </connections>
                                 </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" minimumFontSize="17" id="CaZ-4t-HtY">
-                                    <rect key="frame" x="13" y="60" width="256" height="30"/>
+                                    <rect key="frame" x="13" y="77" width="256" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -101,7 +114,7 @@
                                     </connections>
                                 </textField>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sob-Pa-q7m">
-                                    <rect key="frame" x="13" y="98" width="256" height="30"/>
+                                    <rect key="frame" x="13" y="115" width="256" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal">
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -112,7 +125,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xf3-Cg-dxQ">
-                                    <rect key="frame" x="13" y="136" width="256" height="30"/>
+                                    <rect key="frame" x="13" y="153" width="256" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal">
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -123,7 +136,7 @@
                                     </connections>
                                 </button>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="30" sectionHeaderHeight="22" sectionFooterHeight="22" id="t4S-6q-nry">
-                                    <rect key="frame" x="13" y="90" width="256" height="110"/>
+                                    <rect key="frame" x="13" y="107" width="256" height="110"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
@@ -160,7 +173,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="6ZG-i0-Hvu">
-                    <rect key="frame" x="0.0" y="55" width="320" height="83"/>
+                    <rect key="frame" x="0.0" y="55" width="320" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wpW-PL-m1Q">
@@ -191,13 +204,25 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="znp-Ab-zSm">
+                            <rect key="frame" x="84" y="70" width="152" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Clear Filter">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="clearFilter:" destination="-1" eventType="touchUpInside" id="Itr-LU-LdF"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.95294117649999999" green="0.58823529409999997" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-1591" y="398"/>
+            <point key="canvasLocation" x="-2287" y="435"/>
         </view>
     </objects>
     <resources>

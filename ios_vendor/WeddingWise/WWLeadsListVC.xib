@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6724" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WWLeadsListVC">
@@ -12,7 +12,6 @@
                 <outlet property="imgEvent" destination="vqe-zZ-IrV" id="VTs-MB-qeb"/>
                 <outlet property="imgInquiry" destination="HpI-Hk-M2Y" id="YSP-xe-CLt"/>
                 <outlet property="lblSortBy" destination="hVW-Y0-Vv4" id="Imr-yK-xkd"/>
-                <outlet property="selectorImage" destination="wgX-B3-GgH" id="Ev7-l0-fck"/>
                 <outlet property="sortEventButton" destination="fH4-Wu-2zX" id="rTS-04-v8e"/>
                 <outlet property="sortInquiryButton" destination="fMz-XO-Jwr" id="bRQ-ae-O9A"/>
                 <outlet property="tblBidView" destination="emN-Ou-xUI" id="eQ1-JL-Ity"/>
@@ -26,10 +25,6 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_divder" id="jPR-bJ-kPv">
                     <rect key="frame" x="0.0" y="52" width="320" height="8"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selecter" id="wgX-B3-GgH">
-                    <rect key="frame" x="107" y="50" width="106" height="2"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FkO-p9-kS7">
@@ -54,7 +49,7 @@
                         <action selector="bidBtnClicked:" destination="-1" eventType="touchUpInside" id="9zm-CR-GQf"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fMz-XO-Jwr">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fMz-XO-Jwr">
                     <rect key="frame" x="111" y="61" width="90" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -66,7 +61,7 @@
                         <action selector="inquiryDateSorting:" destination="-1" eventType="touchUpInside" id="txs-LK-VFk"/>
                     </connections>
                 </button>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down" id="HpI-Hk-M2Y">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down" id="HpI-Hk-M2Y">
                     <rect key="frame" x="199" y="68" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -81,7 +76,7 @@
                     <rect key="frame" x="0.0" y="95" width="320" height="8"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                 </imageView>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fH4-Wu-2zX">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fH4-Wu-2zX">
                     <rect key="frame" x="221" y="61" width="77" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -93,7 +88,7 @@
                         <action selector="eventDateSorting:" destination="-1" eventType="touchUpInside" id="l8M-Bb-w21"/>
                     </connections>
                 </button>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down" id="vqe-zZ-IrV">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_down" id="vqe-zZ-IrV">
                     <rect key="frame" x="299" y="68" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -110,7 +105,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="emN-Ou-xUI">
-                    <rect key="frame" x="0.0" y="58" width="320" height="440"/>
+                    <rect key="frame" x="0.0" y="99" width="320" height="418"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -127,7 +122,6 @@
     <resources>
         <image name="arrow_down" width="23" height="20"/>
         <image name="header_divder" width="326" height="6"/>
-        <image name="selecter" width="108" height="3"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

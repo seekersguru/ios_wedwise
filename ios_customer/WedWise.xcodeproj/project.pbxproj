@@ -191,6 +191,10 @@
 		F4D6660F1B83A555000DDF1A /* WWScheduleListingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D6660D1B83A555000DDF1A /* WWScheduleListingVC.xib */; };
 		F4D666131B884511000DDF1A /* WWVendorParaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D666111B884511000DDF1A /* WWVendorParaCell.m */; };
 		F4D666141B884511000DDF1A /* WWVendorParaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D666121B884511000DDF1A /* WWVendorParaCell.xib */; };
+		F4D666181B88C701000DDF1A /* WWPackageDescptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D666161B88C701000DDF1A /* WWPackageDescptionVC.m */; };
+		F4D666191B88C701000DDF1A /* WWPackageDescptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D666171B88C701000DDF1A /* WWPackageDescptionVC.xib */; };
+		F4D6661D1B89D2D1000DDF1A /* serv.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4D6661B1B89D2D1000DDF1A /* serv.txt */; };
+		F4D6661E1B89D2D1000DDF1A /* wednew.pem in Resources */ = {isa = PBXBuildFile; fileRef = F4D6661C1B89D2D1000DDF1A /* wednew.pem */; };
 		F4D8A7671B69520B00677F92 /* WWChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D8A7651B69520B00677F92 /* WWChangePasswordVC.m */; };
 		F4D8A7681B69520B00677F92 /* WWChangePasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D8A7661B69520B00677F92 /* WWChangePasswordVC.xib */; };
 		F4D8B3D31B7919EA009B4466 /* WWFavoriteVendorsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D8B3D11B7919EA009B4466 /* WWFavoriteVendorsVC.m */; };
@@ -509,6 +513,11 @@
 		F4D666101B884511000DDF1A /* WWVendorParaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWVendorParaCell.h; sourceTree = "<group>"; };
 		F4D666111B884511000DDF1A /* WWVendorParaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWVendorParaCell.m; sourceTree = "<group>"; };
 		F4D666121B884511000DDF1A /* WWVendorParaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WWVendorParaCell.xib; sourceTree = "<group>"; };
+		F4D666151B88C701000DDF1A /* WWPackageDescptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWPackageDescptionVC.h; sourceTree = "<group>"; };
+		F4D666161B88C701000DDF1A /* WWPackageDescptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWPackageDescptionVC.m; sourceTree = "<group>"; };
+		F4D666171B88C701000DDF1A /* WWPackageDescptionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WWPackageDescptionVC.xib; sourceTree = "<group>"; };
+		F4D6661B1B89D2D1000DDF1A /* serv.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = serv.txt; sourceTree = "<group>"; };
+		F4D6661C1B89D2D1000DDF1A /* wednew.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wednew.pem; sourceTree = "<group>"; };
 		F4D8A7641B69520B00677F92 /* WWChangePasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWChangePasswordVC.h; sourceTree = "<group>"; };
 		F4D8A7651B69520B00677F92 /* WWChangePasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWChangePasswordVC.m; sourceTree = "<group>"; };
 		F4D8A7661B69520B00677F92 /* WWChangePasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WWChangePasswordVC.xib; sourceTree = "<group>"; };
@@ -577,6 +586,9 @@
 				60C763041B53D19900387B54 /* WWBidListCell.h */,
 				60C763051B53D19900387B54 /* WWBidListCell.m */,
 				60C763061B53D19900387B54 /* WWBidListCell.xib */,
+				F4D666151B88C701000DDF1A /* WWPackageDescptionVC.h */,
+				F4D666161B88C701000DDF1A /* WWPackageDescptionVC.m */,
+				F4D666171B88C701000DDF1A /* WWPackageDescptionVC.xib */,
 			);
 			name = Bid;
 			sourceTree = "<group>";
@@ -912,6 +924,7 @@
 		F470473A1B011AE700FEFEFF /* WeddingWise */ = {
 			isa = PBXGroup;
 			children = (
+				F4D6661A1B89D2C4000DDF1A /* ServerFiles */,
 				F4BC31A41B1794CA00BF5BB2 /* FrameWorks */,
 				F4CBDB281B52FCE0000DB347 /* Model */,
 				F4CFFA321B45BAF20065D5D6 /* Facebook */,
@@ -1268,6 +1281,15 @@
 			name = Message;
 			sourceTree = "<group>";
 		};
+		F4D6661A1B89D2C4000DDF1A /* ServerFiles */ = {
+			isa = PBXGroup;
+			children = (
+				F4D6661B1B89D2D1000DDF1A /* serv.txt */,
+				F4D6661C1B89D2D1000DDF1A /* wednew.pem */,
+			);
+			name = ServerFiles;
+			sourceTree = "<group>";
+		};
 		F4D8B3CF1B7919C2009B4466 /* FavoriteList */ = {
 			isa = PBXGroup;
 			children = (
@@ -1356,6 +1378,7 @@
 				F47047B51B01273100FEFEFF /* myKnotCell.xib in Resources */,
 				C5D210271B60388200DEEBEE /* JSQMessagesToolbarContentView.xib in Resources */,
 				F4CD0F341B5EC13D0006FAC4 /* WWProfileVC.xib in Resources */,
+				F4D6661E1B89D2D1000DDF1A /* wednew.pem in Resources */,
 				F4CD4E301B3082F20081FE0B /* WWCategoryDetailVC.xib in Resources */,
 				F41F96DD1B76156D0096DCE0 /* GooglePlus.bundle in Resources */,
 				60C763111B53D19900387B54 /* WWBidListCell.xib in Resources */,
@@ -1375,6 +1398,7 @@
 				F47047651B011DDC00FEFEFF /* MyKnotList.xib in Resources */,
 				F4CFFA2D1B45B1580065D5D6 /* WWDashboardVC~ipad.xib in Resources */,
 				F4CFFA2F1B45B15D0065D5D6 /* WWLoginVC~ipad.xib in Resources */,
+				F4D666191B88C701000DDF1A /* WWPackageDescptionVC.xib in Resources */,
 				F4CD4E6A1B309D990081FE0B /* ReceiverMsgCell.xib in Resources */,
 				F4609B731B0BC4B800BCCCB8 /* WWRegistrationVC.xib in Resources */,
 				F4C2B1611B4D70FF000639BC /* WWCategoryListCell.xib in Resources */,
@@ -1384,6 +1408,7 @@
 				F4CD4E2B1B3082310081FE0B /* WWCategoryCell.xib in Resources */,
 				C5D20FFF1B60388200DEEBEE /* JSQMessagesAssets.bundle in Resources */,
 				60C7630D1B53D19900387B54 /* WWInquiryDetailVC.xib in Resources */,
+				F4D6661D1B89D2D1000DDF1A /* serv.txt in Resources */,
 				F4CD4E441B30830F0081FE0B /* WWCategoryImageCell.xib in Resources */,
 				60C7630B1B53D19900387B54 /* WWCreateBidVC.xib in Resources */,
 				F4CD4E421B30830F0081FE0B /* WWCategoryTitleCell.xib in Resources */,
@@ -1509,6 +1534,7 @@
 				C56E561F1B6BB785008145EC /* AFURLRequestSerialization.m in Sources */,
 				F4609B771B0BC4D500BCCCB8 /* WWLoginVC.m in Sources */,
 				F470473E1B011AE700FEFEFF /* main.m in Sources */,
+				F4D666181B88C701000DDF1A /* WWPackageDescptionVC.m in Sources */,
 				C5D2101B1B60388200DEEBEE /* JSQMessagesCollectionViewCell.m in Sources */,
 				C5D210061B60388200DEEBEE /* UIView+JSQMessages.m in Sources */,
 				C5D210071B60388200DEEBEE /* JSQMessagesKeyboardController.m in Sources */,

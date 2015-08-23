@@ -21,6 +21,8 @@
 {
     NSMutableArray *arrBidData;
     __block NSString *sortType;
+    
+    BOOL isSorting;
 }
 
 #pragma mark Viewlife cycle methods:
@@ -37,11 +39,12 @@
     _tblBidView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
      [self.navigationController.navigationBar setHidden:YES];
     [_tblBidView registerNib:[UINib nibWithNibName:@"WWBidListCell" bundle:nil] forCellReuseIdentifier:@"WWBidListCell"];
-    arrBidData=[[NSMutableArray alloc]init];
+    
     
     
 }
 -(void)viewWillAppear:(BOOL)animated{
+    arrBidData=[[NSMutableArray alloc]init];
     [self moveImage:selectorImage duration:0.2 curve:UIViewAnimationCurveLinear x:0.0 y:0.0];
     [self callBidDetailAPI:@"bid"];
 }
@@ -116,26 +119,20 @@
         if(_sortEventButton.selected){
             _imgEvent.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(360));
             _sortEventButton.selected= NO;
-            sortType = @"-event_date";
         }
         else{
             _imgEvent.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(180));
             _sortEventButton.selected= YES;
-            sortType= @"event_date";
         }
     }];
-   
-    NSDictionary *dicBidData = [arrBidData firstObject];
-    NSDictionary *dicBidData2 = [arrBidData lastObject];
-    
-    
-    [self callEventSortingAPI:sortType withMax:dicBidData[@"id"] withMin:dicBidData2[@"id"]];
+    arrBidData= [self sortListing:@"event_date" withOrder:_sortEventButton.selected withData:arrBidData];
+    [_tblBidView reloadData];
    
 }
 -(IBAction)loadMoreButtonPressed:(id)sender{
     NSDictionary *dicBidData = [arrBidData firstObject];
     NSDictionary *dicBidData2 = [arrBidData lastObject];
-    
+    isSorting= NO;
     
     [self callEventSortingAPI:sortType withMax:dicBidData[@"id"] withMin:dicBidData2[@"id"]];
 }
@@ -160,16 +157,35 @@
              //[arrBidData removeAllObjects];
              NSArray *arrJson=[responseDics valueForKey:@"json"];
              
+             if(isSorting){
+                 [arrBidData removeAllObjects];
+             }
+             
+             NSMutableArray *arrtTemp = [[NSMutableArray alloc]init];
              
              for (NSDictionary *bidData in arrJson) {
+                 
+                 
                  if([responseDics[@"append"] isEqualToString:@"1"])
                  {
-                     [arrBidData addObject:bidData];
+                    
+                     [arrtTemp addObject:bidData];
+                     
                  }
                  else{
-                     [arrBidData insertObject:bidData atIndex:0];
+                     [arrtTemp insertObject:bidData atIndex:0];
                  }
+                 
+                 
              }
+             [arrtTemp addObjectsFromArray:arrBidData];
+             
+             NSSortDescriptor *brandDescriptor = [[NSSortDescriptor alloc] initWithKey:@"msg_time" ascending:NO];
+             NSMutableArray *sortDescriptors = (NSMutableArray*)[NSArray arrayWithObject:brandDescriptor];
+             arrtTemp = (NSMutableArray*)[arrtTemp sortedArrayUsingDescriptors:sortDescriptors];
+             
+             arrBidData= arrtTemp;
+             
              [_tblBidView reloadData];
          }
          
@@ -186,25 +202,38 @@
         if(_sortInquiryButton.selected){
             _imgInquiry.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(360));
             _sortInquiryButton.selected= NO;
-            sortType = @"-msg_time";
+            //sortType = @"msg_time";
         }
         else{
             _imgInquiry.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(180));
             _sortInquiryButton.selected= YES;
-             sortType= @"msg_time";
+             //sortType= @"-msg_time";
         }
     }];
+    isSorting= YES;
     
-    NSDictionary *dicBidData = [arrBidData firstObject];
-    NSDictionary *dicBidData2 = [arrBidData lastObject];
-    [self callEventSortingAPI:sortType withMax:dicBidData[@"id"] withMin:dicBidData2[@"id"]];
+  
+    
+    arrBidData= [self sortListing:@"msg_time" withOrder: _sortInquiryButton.selected withData:arrBidData];
+    
+    [_tblBidView reloadData];
 }
-
+-(NSMutableArray*)sortListing: (NSString*)sortingType withOrder:(BOOL)order withData:(NSMutableArray*)bidData{
+    
+    NSMutableArray *arrtTemp= [[NSMutableArray alloc]init];
+    arrtTemp= bidData;
+    
+    NSSortDescriptor *brandDescriptor = [[NSSortDescriptor alloc] initWithKey:sortingType ascending:order];
+    NSMutableArray *sortDescriptors = (NSMutableArray*)[NSArray arrayWithObject:brandDescriptor];
+    arrtTemp = (NSMutableArray*)[arrtTemp sortedArrayUsingDescriptors:sortDescriptors];
+ 
+    return arrtTemp;
+}
 
 #pragma mark UITableView delgate & datasource methods:
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 85;
+    return 103;
 }
 
 

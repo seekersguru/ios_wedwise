@@ -20,8 +20,12 @@
 @property(nonatomic, weak)IBOutlet UITextField *txtContactName;
 @property(nonatomic, weak)IBOutlet UIButton *btnTentativeDate;
 @property(nonatomic, weak)IBOutlet UIButton *btnBackButton;
+@property(nonatomic, weak)IBOutlet UIImageView *bgImage;
+@property(nonatomic, weak)IBOutlet UITextField *txtPassword;
+@property(nonatomic, weak)IBOutlet UIButton *btnChangePassword;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 
 -(IBAction)btnTentativeDatePressed:(id)sender;
+-(IBAction)changePassword:(id)sender;
 @end

@@ -119,7 +119,7 @@ static AppDelegate * _sharedInstance;
                                                    initWithRootViewController:firstViewController];
     
     NSString *savedGroomName = [[NSUserDefaults standardUserDefaults]
-                                stringForKey:@"EmailID"];
+                                stringForKey:@"identifier"];
     UINavigationController *secondNavigationController;
     if(savedGroomName.length>0){
         UIViewController *secondViewController = [[WWMessageList alloc] init];
@@ -153,7 +153,7 @@ static AppDelegate * _sharedInstance;
                                 thirdNavigationController,
                                 fourthNavigationController]];
     
-    NSArray *tabBarItemImages = @[@"home", @"message", @"led",@"menu"];
+    NSArray *tabBarItemImages = @[@"home", @"message", @"led", @"menu"];
     NSArray *tabBarSelectedItemImages = @[@"home_icon", @"message_icon", @"sbid",@"menu_icon"];
     
     [self customizeTabBarForController:tabVC images:tabBarItemImages selectedImages:tabBarSelectedItemImages];

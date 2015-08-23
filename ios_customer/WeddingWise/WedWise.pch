@@ -49,6 +49,12 @@
 #define kTentativeDate                  @"Please enter tentative wedding date."
 #define kContactName                    @"Please enter contact name."
 
+#define kEventDate                      @"Please select event date."
+#define kTimeSlot                       @"Please select time slot."
+#define kPackage                        @"Please select package."
+#define kGuestCount                     @"Please enter guest count."
+
+
 #define kGPClientID                     @"1089791830580-d6ot0lmcuqvdftcqqh97a73n8q22l95e.apps.googleusercontent.com"
 //341522735800-tkngmd3u56mq7shvea9pmibng12qdmhj.apps.googleusercontent.com
 

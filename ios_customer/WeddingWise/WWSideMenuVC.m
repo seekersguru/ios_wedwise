@@ -74,6 +74,8 @@
         case 3:{
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"identifier"];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"groom_name"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"EmailID"];
+            
             
             [AppDelegate sharedAppDelegate].isLogOut= YES;
             WWDashboardVC *dash=[[WWDashboardVC alloc]initWithNibName:@"WWDashboardVC" bundle:nil];

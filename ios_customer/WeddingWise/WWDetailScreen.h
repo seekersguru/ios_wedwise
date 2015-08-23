@@ -32,6 +32,9 @@
 @property(weak, nonatomic) IBOutlet UILabel *lblSearchPrice;
 @property(nonatomic, weak)IBOutlet UIImageView *imgDropdown;
 
+@property(nonatomic, weak) IBOutlet UIButton *clearFilterButton;
+
+
 -(IBAction)filterTypeSelection:(id)sender;
 - (IBAction)filterVendor:(id)sender;
 - (IBAction)submitFilterAction:(id)sender;
@@ -40,5 +43,8 @@
 -(IBAction)venueTypeClicked:(id)sender;
 -(IBAction)pricechangedClicked:(id)sender;
 -(IBAction)titleClicked:(id)sender;
+
+-(IBAction)closeButtonClicked:(id)sender;
+-(IBAction)clearFilter:(id)sender;
 
 @end

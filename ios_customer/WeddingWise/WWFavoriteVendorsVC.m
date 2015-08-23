@@ -8,6 +8,7 @@
 
 #import "WWFavoriteVendorsVC.h"
 #import "WWCategoryCell.h"
+#import "WWCategoryDetailVC.h"
 
 @interface WWFavoriteVendorsVC ()<MBProgressHUDDelegate>
 {
@@ -234,11 +235,24 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return arrVendorData.count;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    WWCategoryDetailVC *detailScreen=[[WWCategoryDetailVC alloc]initWithNibName:@"WWCategoryDetailVC" bundle:nil];
+    detailScreen.hidesBottomBarWhenPushed = YES;
+    detailScreen.vendorEmail=[[arrVendorData objectAtIndex:indexPath.row] valueForKey:@"vendor_email"];
+    detailScreen.vendorName=[[arrVendorData objectAtIndex:indexPath.row] valueForKey:@"name"];
+    [self.navigationController pushViewController:detailScreen animated:YES];
+    detailScreen.hidesBottomBarWhenPushed = NO;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)addFavorites:(id)sender{
 
+}
 /*
 #pragma mark - Navigation
 

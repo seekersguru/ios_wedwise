@@ -111,12 +111,27 @@
              registrationVC.image= _bgImage.image;
              [self.navigationController pushViewController:registrationVC animated:YES];
              
-             
-             
         }
          else if ([result isEqualToString:@"success"]){
              //Login successfully
              dispatch_async(dispatch_get_main_queue(), ^{
+                 
+                 NSMutableDictionary *requestData = [responseDics[@"request_data"] mutableCopy];
+                 [requestData setValue:responseDics[@"json"][@"identifier"] forKey:@"identifier"];
+                 
+                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"identifier"];
+                 [[NSUserDefaults standardUserDefaults] setObject:[responseDics valueForKey:@"json"][@"identifier"] forKey:@"identifier"];
+                 
+                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"EmailID"];
+                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"Password"];
+                 
+                 [[NSUserDefaults standardUserDefaults] setObject:[fbResponse valueForKey:@"email"] forKey:@"EmailID"];
+                 [[NSUserDefaults standardUserDefaults] setObject:@"123456" forKey:@"Password"];
+                 [[NSUserDefaults standardUserDefaults] synchronize];
+                 
+                 WWLoginUserData *userData=[[WWLoginUserData alloc]setUserData:requestData];
+                 [AppDelegate sharedAppDelegate].userData= userData;
+                 
                  UITabBarController *tabVC = [[AppDelegate sharedAppDelegate]setupViewControllers:nil];
                  [self.navigationController pushViewController:tabVC animated:YES];
              });

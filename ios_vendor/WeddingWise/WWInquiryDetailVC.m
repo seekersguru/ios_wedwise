@@ -22,7 +22,7 @@
     [self callBidDetailAPI];
     arrBidData= [NSMutableArray new];
     
-
+    tblInquery.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [btnAccept setHidden:NO];
     [lblStatus setFont:[UIFont fontWithName:AppFont size:15.0]];
     [btnAccept.titleLabel setFont:[UIFont fontWithName:AppFont size:15.0f]];

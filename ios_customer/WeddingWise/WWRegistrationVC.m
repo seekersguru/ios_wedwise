@@ -155,12 +155,13 @@
      [self FBAuthentication:[[NSDictionary alloc] initWithObjectsAndKeys:[GPPSignIn sharedInstance].authentication.userEmail,@"email",person.identifier,@"id",@"google+",@"LoginType", nil]]
      */
     
-    NSString *userID =@"";
+    NSString *fbID =@"";
+    NSString *gmailID = @"";
     if([_userType isEqualToString:@"google+"]){
-        userID= _fbResponse[@"id"];
+        gmailID= _fbResponse[@"id"];
     }
     else if([_userType isEqualToString:@"fbUser"]){
-        userID= _fbResponse[@"id"];
+        fbID= _fbResponse[@"id"];
     }
     NSDictionary *reqParameters=[NSDictionary dictionaryWithObjectsAndKeys:
                                  _txtEmailAddress.text,@"email",
@@ -170,8 +171,8 @@
                                  _txtContactNo.text,@"contact_number",
                                  _txtContactName.text,@"contact_name",
                                  _btnTentativeDate.titleLabel.text,@"tentative_wedding_date",
-                                 userID,@"fbid",
-                                 userID,@"gid",
+                                 fbID,@"fbid",
+                                 gmailID,@"gid",
                                  @"",@"contact_name",
                                  @"",@"operation",
                                  @"",@"identifier",
@@ -190,7 +191,12 @@
                  NSMutableDictionary *requestData = [responseDics[@"request_data"] mutableCopy];
                  [requestData setValue:responseDics[@"json"][@"identifier"] forKey:@"identifier"];
                  
+                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"identifier"];
                  [[NSUserDefaults standardUserDefaults] setObject:[responseDics valueForKey:@"json"][@"identifier"] forKey:@"identifier"];
+                 
+                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"EmailID"];
+                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"Password"];
+                 
                  [[NSUserDefaults standardUserDefaults] setObject:_txtEmailAddress.text forKey:@"EmailID"];
                  [[NSUserDefaults standardUserDefaults] setObject:_txtPassword.text forKey:@"Password"];
                  [[NSUserDefaults standardUserDefaults] synchronize];

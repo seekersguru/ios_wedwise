@@ -11,8 +11,9 @@
 #import "WWWebService.h"
 #import "NIDropDown.h"
 #import "DSLCalendarView.h"
+#import "WWPackageDescptionVC.h"
 
-@interface WWCreateBidVC ()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate, NIDropDownDelegate,DSLCalendarViewDelegate, UIAlertViewDelegate>
+@interface WWCreateBidVC ()<UITextFieldDelegate, NIDropDownDelegate,DSLCalendarViewDelegate, UIAlertViewDelegate>
 
 {
     NSMutableArray *packageList;
@@ -28,6 +29,7 @@
     
     NSString *timeSlotID;
     NSString *packegeID;
+    NSInteger peckageRow;
     
 }
 @property(nonatomic, assign)BOOL isViewPositionOffset;
@@ -46,14 +48,11 @@
     
     packegeID = @"";
     timeSlotID = @"";
+
+   
     
-    btnSelect.layer.borderWidth = 1;
-    btnSelect.layer.borderColor = [[UIColor blackColor] CGColor];
-    btnSelect.layer.cornerRadius = 5;
     
-    btnPackage.layer.borderWidth = 1;
-    btnPackage.layer.borderColor = [[UIColor blackColor] CGColor];
-    btnPackage.layer.cornerRadius = 5;
+    
     
     [self.navigationController.navigationBar setHidden:YES];
     
@@ -120,6 +119,9 @@
 }
 -(void)setLabelFonts{
     [[WWCommon getSharedObject]setCustomFont:13.0 withLabel:_headerTitleLabel withText:_headerTitleLabel.titleLabel.text];
+     [[WWCommon getSharedObject]setCustomFont:11.0 withLabel:_staticCheckAvailbility withText:_staticCheckAvailbility.text];
+    [[WWCommon getSharedObject]setCustomFont:13.0 withLabel:_checkAvailbility withText:_checkAvailbility.text];
+    
     [[WWCommon getSharedObject]setCustomFont:12.0 withLabel:_packageDescriptionLabel withText:_packageDescriptionLabel.text];
     [[WWCommon getSharedObject]setCustomFont:13.0 withLabel:_packageTextField withText:_packageTextField.text];
     [[WWCommon getSharedObject]setCustomFont:11.0 withLabel:_eventStaticLabel withText:_eventStaticLabel.text];
@@ -127,6 +129,7 @@
     [[WWCommon getSharedObject]setCustomFont:11.0 withLabel:_packageStaticLabel withText:_packageStaticLabel.text];
     [[WWCommon getSharedObject]setCustomFont:15.0 withLabel:_titleView withText:_titleView.text];
     
+    [[WWCommon getSharedObject]setCustomFont:11.0 withLabel:_pricingStatic withText:_pricingStatic.text];
     [[WWCommon getSharedObject]setCustomFont:15.0 withLabel:_pricing1 withText:_pricing1.text];
     [[WWCommon getSharedObject]setCustomFont:15.0 withLabel:_pricing2 withText:_pricing2.text];
     [[WWCommon getSharedObject]setCustomFont:15.0 withLabel:_titleView withText:_titleView.text];
@@ -175,22 +178,42 @@
         [self rel];
     }
 }
+
+
 - (void) niDropDownDelegateMethod: (NIDropDown *) sender withRow:(NSInteger)row withButtonTag:(NSInteger)buttonTag{
     [self rel];
     if(buttonTag==2){
         [_packageDescriptionLabel setText:[[WWVendorBidData sharedInstance] package][@"package_list"][[[packageFinal objectAtIndex:row] objectAtIndex:0]][@"description"]];
         [_pricing1 setText:[[WWVendorBidData sharedInstance] package][@"package_list"][[[packageFinal objectAtIndex:row] objectAtIndex:0]][@"pricing"][@"line1"]];
         [_pricing2 setText:[[WWVendorBidData sharedInstance] package][@"package_list"][[[packageFinal objectAtIndex:row] objectAtIndex:0]][@"pricing"][@"line2"]];
+        peckageRow= row;
+        [_btnDescriptionURL setTitle:[[WWVendorBidData sharedInstance] package][@"package_list"][[[packageFinal objectAtIndex:row] objectAtIndex:0]][@"desscription_url"] forState:UIControlStateNormal];
         
-        packegeID= [[_pickerArray objectAtIndex:row] objectAtIndex:0];
+        NSString *descURL= [[WWVendorBidData sharedInstance] package][@"package_list"][[[packageFinal objectAtIndex:row] objectAtIndex:0]][@"desscription_url"];
+        
+        if(descURL.length>0){
+            [_btnDescriptionURL setHidden:NO];
+            [_btnDescriptionURL setTitle:@"Click here for detail" forState:UIControlStateNormal];
+        }
+        else{
+            [_btnDescriptionURL setHidden:YES];
+        }
+        [_btnDescriptionURL.titleLabel setFont:[UIFont fontWithName:AppFont size:13.0]];
+        packegeID= [packageOrder objectAtIndex:row];
     }
     if(buttonTag==1){
-        
         timeSlotID=[[_pickerArray objectAtIndex:row] objectAtIndex:0];
         if(![_eventDateButton.titleLabel.text isEqualToString:@"Select Date"]){
-            [self callAvailabilityAPI:row];
+            [self callAvailabilityAPI];
         }
     }
+}
+- (void)descriptionUrlClicked:(id)sender{
+    WWPackageDescptionVC *description= [[WWPackageDescptionVC alloc]initWithNibName:@"WWPackageDescptionVC" bundle:nil];
+    
+    description.strPackageDesc= [[WWVendorBidData sharedInstance] package][@"package_list"][[[packageFinal objectAtIndex:peckageRow] objectAtIndex:0]][@"desscription_url"];
+    
+    [self.navigationController pushViewController:description animated:YES];
 }
 -(void)niSelectValue:(id)sender{
 
@@ -211,43 +234,64 @@
                      completion:^(BOOL finished){
                      }];
 }
--(void)callAvailabilityAPI:(NSInteger)row{
+-(void)callAvailabilityAPI{
     
-    if(_eventDateButton.titleLabel.text && btnSelect.titleLabel.text){
-        NSDictionary *reqParameters= [[NSDictionary alloc]initWithObjectsAndKeys:
-                                      @"check_availability",@"action",
-                                      [[NSUserDefaults standardUserDefaults]
-                                       stringForKey:@"identifier"],@"identifier",
-                                      [AppDelegate sharedAppDelegate].vendorEmail, @"vendor_email",
-                                      [[_pickerArray objectAtIndex:row] objectAtIndex:0],@"time_slot",
-                                      _eventDateButton.titleLabel.text,@"event_date",
-                                      nil];
-        
-        [[WWWebService sharedInstanceAPI] callWebService:reqParameters imgData:nil loadThreadWithCompletion:^(NSDictionary *responseDics)
-         {
-             if([[responseDics valueForKey:@"result"] isEqualToString:@"error"]){
-                 [[WWCommon getSharedObject]createAlertView:kAppName :[responseDics valueForKey:@"message"] :nil :000 ];
-             }
-             else if ([[responseDics valueForKey:@"result"] isEqualToString:@"success"]){
-                 if([[NSString stringWithFormat:@"%@",responseDics[@"json"][@"available"]] isEqualToString:@"1"]){
-                     [_checkAvailbility setText:@"Available"];
-                     [_checkAvailbility setTextColor:[UIColor greenColor]];
+    
+        if(_eventDateButton.titleLabel.text && btnSelect.titleLabel.text){
+            NSDictionary *reqParameters= [[NSDictionary alloc]initWithObjectsAndKeys:
+                                          @"check_availability",@"action",
+                                          [[NSUserDefaults standardUserDefaults]
+                                           stringForKey:@"identifier"],@"identifier",
+                                          [AppDelegate sharedAppDelegate].vendorEmail, @"vendor_email",
+                                          timeSlotID,@"time_slot",
+                                          _eventDateButton.titleLabel.text,@"event_date",
+                                          nil];
+            
+            [[WWWebService sharedInstanceAPI] callWebService:reqParameters imgData:nil loadThreadWithCompletion:^(NSDictionary *responseDics)
+             {
+                 if([[responseDics valueForKey:@"result"] isEqualToString:@"error"]){
+                     [[WWCommon getSharedObject]createAlertView:kAppName :[responseDics valueForKey:@"message"] :nil :000 ];
                  }
-                 else{
-                     [_checkAvailbility setText:@"Unavailable"];
-                     [_checkAvailbility setTextColor:[UIColor redColor]];
+                 // 'Available’[1], 'Ongoing Inquiries’[2] and 'Booked’[3]
+                 else if ([[responseDics valueForKey:@"result"] isEqualToString:@"success"]){
+                     if([[NSString stringWithFormat:@"%@",responseDics[@"json"][@"available"]] isEqualToString:@"1"]){
+                         [_checkAvailbility setText:@"Available"];
+                         [_checkAvailbility setTextColor:[UIColor colorWithRed:78.0/255.0f green:122.0/255.0f blue:40.0/255.0f alpha:1.0]];
+                     }
+                     else if([[NSString stringWithFormat:@"%@",responseDics[@"json"][@"available"]] isEqualToString:@"2"]){
+                         
+                         [_checkAvailbility setText:@"Ongoing Inquiries"];
+                         [_checkAvailbility setTextColor:[UIColor colorWithRed:78.0/255.0f green:122.0/255.0f blue:40.0/255.0f alpha:1.0]];
+                     }
+                     else if([[NSString stringWithFormat:@"%@",responseDics[@"json"][@"available"]] isEqualToString:@"3"]){
+                         [_checkAvailbility setText:@"Booked"];
+                         [_checkAvailbility setTextColor:[UIColor redColor]];
+                     }
+                     
                  }
-                 [_checkAvailbility setFont:[UIFont fontWithName:AppFont size:15.0f]];
+                 
              }
-             
-         }
-                                                 failure:^(NSString *response)
-         {
-             DLog(@"%@",response);
-         }];
-    }
+                                                     failure:^(NSString *response)
+             {
+                 DLog(@"%@",response);
+             }];
+        }
+   
 }
+-(BOOL)checkValidations{
+    
+    if(![_checkAvailbility.text isEqualToString:@"Available"]){
+        [[WWCommon getSharedObject]createAlertView:kAppName :@"Event date and time slot must be available." :nil :000 ];
+        return NO;
+    }
+   else if (btnPackage.titleLabel.text == nil)
+    {
+        [[WWCommon getSharedObject]createAlertView:kAppName :kPackage :nil :000 ];
+        return NO;
+    }
 
+    return YES;
+}
 
 #pragma mark - textfield delegate methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
@@ -307,71 +351,77 @@
     }
 }
 - (void)bidItAction:(id)sender{
-    NSString *json_string = nil;
-    
-    NSString *messageType;
-    NSString *jsonType;
-    
-    if ([_requestType isEqualToString:@"bid"]) {
-        //check validations for bid price
-        NSString *errorMessage = nil;
-        if (errorMessage) {
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:errorMessage delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
-            return;
-        }
-        NSData *data = [NSJSONSerialization dataWithJSONObject:[WWVendorBidData sharedInstance].bidDictionary options:NSJSONWritingPrettyPrinted error:nil];
-        json_string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    if([self checkValidations]){
         
-        messageType= @"bid";
-        jsonType= @"bid_json";
-    }
-    else{
-        NSData *data = [NSJSONSerialization dataWithJSONObject:[WWVendorBookingData sharedInstance].bookDictionary options:NSJSONWritingPrettyPrinted error:nil];
-        json_string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *json_string = nil;
         
-         messageType= @"book";
-        jsonType= @"book_json";
-    }
-    
-    NSDictionary *requestDict = @{@"identifier" : [[NSUserDefaults standardUserDefaults]
-                                                   stringForKey:@"identifier"],
-                                  @"receiver_email" : [WWVendorDetailData sharedInstance].vendorEmail,
-                                  @"message" : @"IOS creating bid",
-                                  @"from_to" : @"c2v",
-                                  @"action" : @"customer_vendor_message_create",
-                                  @"mode" : @"ios",
-                                  @"device_id" : @"123123",
-                                  @"push_data" : @"posting bid",
-                                  @"msg_type" : messageType,
-                                  @"event_date" : _eventDateButton.titleLabel.text,    //TODO:date should be dynamic, Will do later
-                                  jsonType : json_string,
-                                  @"time_slot" :timeSlotID,
-                                  @"package":packegeID, //TODO:make dynamic
-                                  @"num_guests":_guestTextField.text,
-                                  @"notes":_textComment.text,
-                                  };
-    //[[_pickerArray objectAtIndex:1] objectAtIndex:0]
-    //[[packageFinal objectAtIndex:1] objectAtIndex:0]
-    
-    [[WWWebService sharedInstanceAPI] callWebService:requestDict imgData:nil loadThreadWithCompletion:^(NSDictionary *response) {
-        if([[response valueForKey:@"result"] isEqualToString:@"error"]){
-            [[WWCommon getSharedObject]createAlertView:kAppName :[response valueForKey:@"message"] :nil :000 ];
-        }
-        else if ([[response valueForKey:@"result"] isEqualToString:@"success"]){
-            NSString *successMsg = nil;
-            if ([_requestType isEqualToString:@"bid"]) {
-                successMsg = @"Bid successfully created";
+        NSString *messageType;
+        NSString *jsonType;
+        
+        if ([_requestType isEqualToString:@"bid"]) {
+            //check validations for bid price
+            NSString *errorMessage = nil;
+            if (errorMessage) {
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:errorMessage delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                return;
             }
-            else{
-                successMsg = @"Booking successfully created";
-            }
-            [[WWCommon getSharedObject]createAlertView:@"" :successMsg :self :000 ];
-            //go back to vendor detail page
-            self.tabBarController.selectedIndex = 0;
+            NSData *data = [NSJSONSerialization dataWithJSONObject:[WWVendorBidData sharedInstance].bidDictionary options:NSJSONWritingPrettyPrinted error:nil];
+            json_string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            messageType= @"bid";
+            jsonType= @"bid_json";
         }
-    } failure:^(NSString *failureResponse) {
+        else{
+            NSData *data = [NSJSONSerialization dataWithJSONObject:[WWVendorBookingData sharedInstance].bookDictionary options:NSJSONWritingPrettyPrinted error:nil];
+            json_string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            messageType= @"book";
+            jsonType= @"book_json";
+        }
         
-    }];
+        NSDictionary *requestDict = @{@"identifier" : [[NSUserDefaults standardUserDefaults]
+                                                       stringForKey:@"identifier"],
+                                      @"receiver_email" : [WWVendorDetailData sharedInstance].vendorEmail,
+                                      @"message" : @"IOS creating bid",
+                                      @"from_to" : @"c2v",
+                                      @"action" : @"customer_vendor_message_create",
+                                      @"mode" : @"ios",
+                                      @"device_id" : @"123123",
+                                      @"push_data" : @"posting bid",
+                                      @"msg_type" : messageType,
+                                      @"event_date" : _eventDateButton.titleLabel.text,
+                                      jsonType : json_string,
+                                      @"time_slot" :timeSlotID,
+                                      @"package":packegeID,
+                                      @"num_guests":_guestTextField.text,
+                                      @"notes":_textComment.text,
+                                      };
+        
+        
+        [[WWWebService sharedInstanceAPI] callWebService:requestDict imgData:nil loadThreadWithCompletion:^(NSDictionary *response) {
+            if([[response valueForKey:@"result"] isEqualToString:@"error"]){
+                [[WWCommon getSharedObject]createAlertView:kAppName :[response valueForKey:@"message"] :nil :000 ];
+            }
+            else if ([[response valueForKey:@"result"] isEqualToString:@"success"]){
+                NSString *successMsg = nil;
+                if ([_requestType isEqualToString:@"bid"]) {
+                    successMsg = @"Inquiry sent";
+                }
+                else{
+                    successMsg = @"Booking successfully created";
+                }
+                [[WWCommon getSharedObject]createAlertView:@"" :successMsg :self :000 ];
+                //go back to vendor detail page
+                self.tabBarController.selectedIndex = 0;
+            }
+        } failure:^(NSString *failureResponse) {
+            
+        }];
+    
+    }
+    
+    
 }
 -(IBAction)backButtonPressed:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
@@ -402,6 +452,11 @@
         NSString *strDate=[dateFormat stringFromDate:selecteDate];
         
         [_eventDateButton setTitle:strDate forState:UIControlStateNormal];
+        
+        if(btnSelect.titleLabel.text.length>0){
+            [self callAvailabilityAPI];
+        }
+        
         
         [UIView animateWithDuration:0.3
                               delay:0.0

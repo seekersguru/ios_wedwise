@@ -71,35 +71,17 @@ NSUInteger lastSelectedIndex = 0;
     _calendarView.showEventsOnCalloutView = YES;
     _calendarView.delegate = self;
     
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];;
-    [formatter setDateFormat:@"yyyy"];
-    NSString *year = [formatter stringFromDate:[NSDate date]];
-    [formatter setDateFormat:@"MM"];
-    NSString *month = [formatter stringFromDate:[NSDate date]];
-    [[WWBasicDetails sharedInstance] setCurrentDateInCalendar:[NSDate date]];
-    [self updateCalendarHomeWithUserId:[[NSUserDefaults standardUserDefaults]
-                                        stringForKey:@"identifier"] year:year month:month additionalFilter:@"" completionBlock:^(NSDictionary *response) {
-        NSMutableDictionary *eventDict = [NSMutableDictionary new];
-        for (NSDictionary *events in [response valueForKey:@"data"]) {
-            [eventDict setValue:[NSString stringWithFormat:@"%ld",(long)[[events valueForKey:@"count"] integerValue]] forKey:[NSString stringWithFormat:@"%ld",(long)[[events valueForKey:@"day"] integerValue]]];
-        }
-        NSDictionary *finalEventDict = @{year:@{month:eventDict}};
-        [self showEvents:finalEventDict];
-    } errorBlock:^(NSError *error) {
-        
-    }];
-    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewWillLayoutSubviews{
+    //[self callUpdateCalendarView];
+}
 - (void)viewWillAppear:(BOOL)animated{
    
-    [self.tabBarController.navigationController.navigationBar setHidden:YES];
-    [self.navigationController.navigationBar setHidden:YES];
     
-    
+    //[self performSelector:@selector(callUpdateCalendarView) withObject:self afterDelay:3.0 ];
     lastSelectedDate = nil;
     [self hideView];
     filter1 = @"";
@@ -113,7 +95,34 @@ NSUInteger lastSelectedIndex = 0;
             [bt setSelected:NO];
         }
     }
+     [self callUpdateCalendarView];
 }
+-(void)callUpdateCalendarView{
+    [self.tabBarController.navigationController.navigationBar setHidden:YES];
+    [self.navigationController.navigationBar setHidden:YES];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];;
+    [formatter setDateFormat:@"yyyy"];
+    
+    NSString *year = [formatter stringFromDate:[NSDate date]];
+    [formatter setDateFormat:@"MM"];
+    NSString *month = [formatter stringFromDate:[NSDate date]];
+    [[WWBasicDetails sharedInstance] setCurrentDateInCalendar:[NSDate date]];
+    
+    [[WWBasicDetails sharedInstance] setCurrentDateInCalendar:selectedMonthFromCalendar];
+    [self updateCalendarHomeWithUserId:[[NSUserDefaults standardUserDefaults]
+                                        stringForKey:@"identifier"] year:year month:month additionalFilter:@"" completionBlock:^(NSDictionary *response) {
+        NSMutableDictionary *eventDict = [NSMutableDictionary new];
+        for (NSDictionary *events in [response valueForKey:@"data"]) {
+            [eventDict setValue:[NSString stringWithFormat:@"%ld",(long)[[events valueForKey:@"count"] integerValue]] forKey:[NSString stringWithFormat:@"%ld",(long)[[events valueForKey:@"day"] integerValue]]];
+        }
+        NSDictionary *finalEventDict = @{year:@{month:eventDict}};
+        [self showEvents:finalEventDict];
+    } errorBlock:^(NSError *error) {
+        
+    }];
+}
+
 - (IBAction)clearAllFilters:(id)sender {
     filter1 = @"";
     filter2 = @"";
@@ -312,12 +321,13 @@ NSString *selectedDatesString = @"";
         if([startDate isEqualToString:endDate]){
             [[WWBasicDetails sharedInstance] setCalendarDate:[NSString stringWithFormat:@"%02ld-%02ld-%ld",(long)range.startDay.day,(long)range.startDay.month,(long)range.startDay.year]];
             
-            if (lastSelectedDate != nil) {
-                NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:range.startDay];
-                if (lastSelectedDate == date) {
-                    self.tabBarController.selectedIndex = 2;
-                }
-            }
+//            if (lastSelectedDate != nil) {
+//                NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:range.startDay];
+//                if (lastSelectedDate == date) {
+//                    
+//                }
+//            }
+            self.tabBarController.selectedIndex = 2;
             lastSelectedDate = [[NSCalendar currentCalendar] dateFromComponents:range.startDay];
         }else{
             [self getAllDatesFromRange:startDate withLastDate:endDate];

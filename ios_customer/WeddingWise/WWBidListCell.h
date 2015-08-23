@@ -14,6 +14,7 @@
 @property(nonatomic, strong)IBOutlet UILabel *eventDate;
 @property(nonatomic, strong)IBOutlet UILabel *details;
 @property(nonatomic, strong)IBOutlet UILabel *status;
+@property(nonatomic, strong)IBOutlet UILabel *time;
 
 -(void)setData:(NSDictionary*)data;
 

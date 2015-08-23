@@ -23,10 +23,9 @@
     
     if(selectedIndex!=3){
         if ([[NSUserDefaults standardUserDefaults]stringForKey:@"groom_name"] == nil){
-            [_btnBackButton setHidden:YES];
+           // [_btnBackButton setHidden:YES];
         }
     }
-    
     [[WWCommon getSharedObject]setCustomFont:17.0 withLabel:_btnTentativeDate withText:_btnTentativeDate.titleLabel.text];
     [[WWCommon getSharedObject]setCustomFont:17.0 withLabel:_txtEmailAddress withText:_txtEmailAddress.text];
     [[WWCommon getSharedObject]setCustomFont:17.0 withLabel:_txtGroomName withText:_txtGroomName.text];
@@ -42,24 +41,54 @@
     [_datePicker setHidden:YES];
     [_imgDatePicker setHidden:YES];
     
+    [_txtPassword setHidden:YES];
     [self getUserProfileAPI];
+}
+- (void)viewDidLayoutSubviews{
+    
+    if(_btnChangePassword.selected){
+        [_bgImage setFrame:CGRectMake(_bgImage.frame.origin.x, _bgImage.frame.origin.y, _bgImage.frame.size.width, 334)];
+    }
+    else{
+        [_bgImage setFrame:CGRectMake(_bgImage.frame.origin.x, _bgImage.frame.origin.y, _bgImage.frame.size.width, 289)];
+    }
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.tabBarController.navigationController.navigationBar setHidden:YES];
     [self.navigationController.navigationBar setHidden:YES];
 }
 #pragma mark: IBAction & utility methods:
+- (void)changePassword:(id)sender{
+    _txtPassword.text= @"";
+    
+    if(_btnChangePassword.selected){
+        _btnChangePassword.selected= NO;
+        [_txtPassword setHidden:YES];
+        [_btnChangePassword setTitle:@"Change password" forState:UIControlStateNormal];
+        [_bgImage setFrame:CGRectMake(_bgImage.frame.origin.x, _bgImage.frame.origin.y, _bgImage.frame.size.width, 289)];
+    }
+    else{
+        _btnChangePassword.selected= YES;
+        [_txtPassword setHidden:NO];
+        [_btnChangePassword setTitle:@"Don't update password" forState:UIControlStateNormal];
+        [_bgImage setFrame:CGRectMake(_bgImage.frame.origin.x, _bgImage.frame.origin.y, _bgImage.frame.size.width, 334)];
+    }
+}
 -(void)dismissKeyboard {
     [_txtEmailAddress resignFirstResponder];
     [_txtGroomName resignFirstResponder];
     [_txtBrideName resignFirstResponder];
     [_txtContactNo resignFirstResponder];
     [_txtContactName resignFirstResponder];
+    [_txtPassword resignFirstResponder];
+    
     [_datePicker setHidden:YES];
     [_imgDatePicker setHidden:YES];
 }
 -(void)getUserProfileAPI{
   
+    
     NSDictionary *reqParameters=[NSDictionary dictionaryWithObjectsAndKeys:
                                  @"",@"email",
                                  @"",@"password",
@@ -137,9 +166,18 @@
     }
 }
 -(void)updateUserProfile{
+    
+    NSString *password= @"";
+    if(!_btnChangePassword.selected){
+        password= @"";
+    }
+    else{
+        password = _txtPassword.text;
+        
+    }
     NSDictionary *reqParameters=[NSDictionary dictionaryWithObjectsAndKeys:
                                  _txtEmailAddress.text,@"email",
-                                  @"123456",@"password",
+                                  password,@"password",
                                  _txtGroomName.text,@"groom_name",
                                  _txtBrideName.text,@"bride_name",
                                  _txtContactNo.text,@"contact_number",
@@ -160,12 +198,15 @@
          }
          else if ([[responseDics valueForKey:@"result"] isEqualToString:@"success"]){
              NSMutableDictionary *requestData = [responseDics[@"request_data"] mutableCopy];
-             //[requestData setValue:responseDics[@"json"][@"identifier"] forKey:@"identifier"];
-             
+            
              [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"identifier"];
-             
              [[NSUserDefaults standardUserDefaults] setObject:responseDics[@"request_data"][@"identifier"] forKey:@"identifier"];
-              [[NSUserDefaults standardUserDefaults] synchronize];
+             
+             if(_btnChangePassword.selected){
+                 [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"Password"];
+                 [[NSUserDefaults standardUserDefaults] setObject:_txtPassword.text forKey:@"Password"];
+             }
+             [[NSUserDefaults standardUserDefaults] synchronize];
              
              WWLoginUserData *userData=[[WWLoginUserData alloc]setUserData:requestData];
              [AppDelegate sharedAppDelegate].userData= userData;
@@ -203,7 +244,6 @@
         [[WWCommon getSharedObject]createAlertView:kAppName :kContactName :nil :000 ];
         return NO;
     }
-    
     if (_btnTentativeDate.titleLabel.text && _btnTentativeDate.titleLabel.text.length == 0)
     {
         [[WWCommon getSharedObject]createAlertView:kAppName :kTentativeDate :nil :000 ];
@@ -287,6 +327,10 @@
         else if (textField == _txtContactName){
             targetYPosition = _txtGroomName.frame.origin.y;
         }
+        else if(textField == _txtPassword){
+            targetYPosition = _txtGroomName.frame.origin.y;
+        }
+        
         int diffY = textField.frame.origin.y - targetYPosition;
         [UIView animateWithDuration:0.2 animations:^{
             CGRect frame = self.view.frame;

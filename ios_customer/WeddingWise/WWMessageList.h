@@ -19,6 +19,7 @@
     IBOutlet UIImageView *imgSeperator;
     IBOutlet UIButton *btnCreateBid;    
     IBOutlet UIImageView *selectorImage;
+    IBOutlet UIButton *btnLoadMore;
 
 }
 -(IBAction)createBidPressed:(id)sender;

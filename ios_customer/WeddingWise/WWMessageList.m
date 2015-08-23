@@ -30,6 +30,18 @@
     [super viewDidLoad];
     [self.navigationController.navigationBar setHidden:YES];
     
+//    NSString *tem = btnLoadMore.titleLabel.text;
+//    
+//    if (tem != nil && ![tem isEqualToString:@"Load more"]) {
+//        NSMutableAttributedString *temString=[[NSMutableAttributedString alloc]initWithString:tem];
+//        [temString addAttribute:NSUnderlineStyleAttributeName
+//                          value:[NSNumber numberWithInt:1]
+//                          range:(NSRange){0,[temString length]}];
+//        
+//        btnLoadMore.titleLabel.attributedText = temString;
+//    }
+    
+    
     messageTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [messageTable registerNib:[UINib nibWithNibName:@"MessageListCell" bundle:nil] forCellReuseIdentifier:@"MessageListCell"];

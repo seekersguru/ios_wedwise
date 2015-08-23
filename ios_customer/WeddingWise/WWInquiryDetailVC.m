@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    tblInquery.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     [self callBidDetailAPI];
     arrBidData= [NSMutableArray new];
     
